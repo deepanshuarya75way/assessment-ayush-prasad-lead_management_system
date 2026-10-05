@@ -42,9 +42,12 @@ import datetime
 import pandas as pd  # type: ignore
 import requests
 from bs4 import BeautifulSoup
-import boto3
+import boto3m
 from botocore.exceptions import ClientError
 from dotenv import load_dotenv
+
+RETRY_MAX_ATTEMPTS = int(os.getenv("PIPLINE_RETRY_ATTEMPTS", "3"))
+RETRY_BACKOFF_SECONDS = float(os.getenv("PIPELINE_RETRY_BACKOFF_SECONDS", "2"))
 
 load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".env"))
 
